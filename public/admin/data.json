@@ -1,0 +1,126 @@
+{
+  "hero": {
+    "name": "Chowdhury Azmain Faik",
+    "role": "Software QA Engineer",
+    "tagline": "Security · Automation",
+    "bio": "Detail-oriented and innovation-driven software professional bridging development and quality assurance to deliver reliable, scalable, high-performing applications.",
+    "available": true,
+    "stats": [
+      { "num": "3+", "label": "Years Experience" },
+      { "num": "3", "label": "Companies" },
+      { "num": "6+", "label": "Tech Skills" }
+    ],
+    "current_company": "Inteliweave"
+  },
+  "about": {
+    "bio1": "I'm a Software QA Engineer with a strong background spanning manual testing, automation, cybersecurity, and full-stack development. Currently working at Inteliweave — an umbrella of AIDocBuilder Inc, Canada.",
+    "bio2": "I aim to leverage my understanding of SDLC, testing methodologies, and modern development practices to contribute to building robust systems and collaborating with cross-functional teams.",
+    "bio3": "Based in Mohakhali DOHS, Dhaka, Bangladesh.",
+    "email": "chowdhury.azmain.faik@gmail.com",
+    "phone": "01750787467",
+    "location": "Mohakhali DOHS, Dhaka",
+    "linkedin": "#",
+    "github": "#"
+  },
+  "skills": [
+    {
+      "icon": "🧪",
+      "title": "Manual Testing",
+      "tags": ["Requirement Analysis","Test Planning","Test Case Dev","Mind Mapping","Defect Reporting","Root Cause Analysis","Test Execution"]
+    },
+    {
+      "icon": "🤖",
+      "title": "Automation & API",
+      "tags": ["Selenium","Postman","JMeter","Newman","Performance Testing","Database Testing"]
+    },
+    {
+      "icon": "🔐",
+      "title": "Security & Infra",
+      "tags": ["Nmap","Cybersecurity","Cloud Security","Virtualization","System Infra","Red Hat Linux"]
+    },
+    {
+      "icon": "💻",
+      "title": "Programming",
+      "tags": ["Python","Java","React JS","HTML / CSS","Laravel PHP","Livewire"]
+    },
+    {
+      "icon": "🗄️",
+      "title": "Tools & Concepts",
+      "tags": ["Jira","GitHub","MySQL","SDLC","OOP","QA Methodologies"]
+    },
+    {
+      "icon": "🤝",
+      "title": "Interpersonal",
+      "tags": ["Communication","Teamwork","Problem Solving","Flexibility","Decision Making","Technical Sales"]
+    }
+  ],
+  "experience": [
+    {
+      "role": "Software QA Engineer",
+      "company": "Inteliweave · AIDocBuilder Inc, Canada",
+      "location": "Hybrid · Software QA Department",
+      "period": "Feb 2025 – Present",
+      "current": true,
+      "desc": "Working as a QA Engineer within an AI-focused product team under AIDocBuilder Inc, Canada. Responsible for ensuring quality and reliability of AI-powered document processing systems through comprehensive test planning, execution, and defect management."
+    },
+    {
+      "role": "Associate Cyber Security Architect",
+      "company": "Global Brand Private Limited",
+      "location": "Dhanmondi, Dhaka · SABiM Department",
+      "period": "Jun 2023 – Feb 2025",
+      "current": false,
+      "desc": "Worked in Solutions Architecture and Bid Management, providing technical consultancy, cybersecurity assessments, and system infrastructure solutions. Engaged in technical sales, cloud security, and virtualization services."
+    },
+    {
+      "role": "Junior Software Engineer",
+      "company": "Byte Trek Limited",
+      "location": "Mohakhali DOHS, Dhaka · IT Department",
+      "period": "Jan 2023 – May 2023",
+      "current": false,
+      "desc": "Started professional career as a Junior Software Engineer, contributing to IT department development efforts. Gained hands-on experience with software development practices, SDLC, and team collaboration."
+    }
+  ],
+  "education": [
+    {
+      "badge": "Bachelor's Degree",
+      "degree": "BSc in Computer Science",
+      "school": "BRAC University",
+      "duration": "2018 – 2022",
+      "gpa": "3.35 / 4.0"
+    },
+    {
+      "badge": "HSC",
+      "degree": "Higher Secondary Certificate",
+      "school": "Rajshahi Govt. City College",
+      "duration": "2015 – 2017",
+      "gpa": "5.00 / 5.00"
+    },
+    {
+      "badge": "SSC",
+      "degree": "Secondary School Certificate",
+      "school": "Seroil Govt. High School, Rajshahi",
+      "duration": "Science",
+      "gpa": "5.00 / 5.00"
+    }
+  ],
+  "certification": {
+    "title": "SQA and Cyber Security",
+    "org": "IT Training BD"
+  },
+  "projects": [
+    {
+      "icon": "🛒",
+      "type": "Manual Testing",
+      "title": "Daraz E-commerce Test Cases",
+      "desc": "Comprehensive test case suite for the Daraz e-commerce platform covering functional, regression, and edge case scenarios across key user journeys.",
+      "link": "#"
+    },
+    {
+      "icon": "🗺️",
+      "type": "Test Planning",
+      "title": "Daraz E-commerce Mind Map",
+      "desc": "Visual mind map for Daraz's platform, structuring test coverage areas, modules, and testing strategies for efficient QA planning and documentation.",
+      "link": "#"
+    }
+  ]
+}
