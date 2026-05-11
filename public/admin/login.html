@@ -89,7 +89,7 @@ input.err-inp{border-color:rgba(255,107,107,.5)}
       <div class="att" id="att-left"></div>
     </div>
     <button class="btn-primary" id="login-btn" onclick="doLogin()">Sign In →</button>
-    <div class="hint">Default ID: <b>azmain</b> &nbsp;·&nbsp; Default PW: <b>CAF@2025</b></div>
+    
   </div>
 
   <!-- ── RESET ── -->
@@ -313,9 +313,14 @@ async function sendOTP() {
     });
   } catch(e) { /* fallback below */ }
 
-  // Always show OTP in alert (until EmailJS is configured)
+  // Secure: OTP is NOT shown in the UI
+  // It is only available via email (when EmailJS is configured)
+  // or via browser console on localhost for testing
+  if(window.location.hostname==='localhost'||window.location.hostname==='127.0.0.1'){
+    console.log('[DEV ONLY] OTP:', otpVal);
+  }
   showAlert('reset-alert',
-    'OTP sent! Your code is: ' + otpVal + '  (valid 10 minutes)',
+    'OTP sent to chowdhury.azmain.faik@gmail.com — check your inbox and spam. Valid 10 minutes.',
     'a-info'
   );
 
