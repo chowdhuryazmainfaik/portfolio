@@ -93,6 +93,28 @@ input:checked+.tsl::before{transform:translateX(19px)}
 .step-num{width:24px;height:24px;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:.72rem;font-weight:700;flex-shrink:0;margin-top:.1rem}
 code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15rem .45rem;border-radius:4px;color:var(--c4)}
 @media(max-width:900px){.ovg{grid-template-columns:1fr 1fr}}
+
+.md-tool{padding:.28rem .6rem;border-radius:5px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .2s}
+.md-tool:hover{background:rgba(77,150,255,.1);border-color:rgba(77,150,255,.3);color:var(--c4)}
+.blog-post-item{background:var(--card2);border:1px solid var(--border);border-radius:11px;padding:1rem 1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:all .2s}
+.blog-post-item:hover{border-color:rgba(77,150,255,.3);background:rgba(77,150,255,.04)}
+.blog-post-info{flex:1}
+.blog-post-title{font-size:.9rem;font-weight:600;color:var(--text)}
+.blog-post-meta{font-size:.75rem;color:var(--muted);margin-top:.2rem}
+.blog-status{font-size:.68rem;font-weight:700;padding:.22rem .65rem;border-radius:100px}
+.blog-status.pub{background:rgba(107,203,119,.1);border:1px solid rgba(107,203,119,.25);color:var(--c3)}
+.blog-status.draft{background:rgba(255,217,61,.1);border:1px solid rgba(255,217,61,.25);color:var(--c2)}
+.md-body h1,.md-body h2,.md-body h3{font-weight:700;margin:1.5rem 0 .7rem}
+.md-body h2{font-size:1.1rem;border-bottom:1px solid var(--border);padding-bottom:.4rem}
+.md-body h3{font-size:.95rem;color:var(--c4)}
+.md-body p{margin-bottom:1rem;color:var(--muted);font-size:.88rem;line-height:1.8}
+.md-body strong{color:var(--text)}
+.md-body ul,.md-body ol{margin:0 0 1rem 1.3rem;color:var(--muted);font-size:.88rem}
+.md-body li{margin-bottom:.3rem}
+.md-body code{background:rgba(77,150,255,.1);border:1px solid rgba(77,150,255,.2);color:var(--c4);padding:.1rem .4rem;border-radius:4px;font-size:.82rem;font-family:monospace}
+.md-body pre{background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:10px;padding:1rem;overflow-x:auto;margin-bottom:1rem}
+.md-body pre code{background:none;border:none;color:var(--c3)}
+.md-body blockquote{border-left:3px solid var(--c4);padding:.4rem .9rem;margin:0 0 1rem;background:rgba(77,150,255,.05);border-radius:0 7px 7px 0}
 </style>
 </head>
 <body>
@@ -109,6 +131,7 @@ code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15re
     <button class="ni" onclick="sw('education',this)"><span>🎓</span>Education</button>
     <button class="ni" onclick="sw('projects',this)"><span>🗂️</span>Projects</button>
     <div class="nl">Config</div>
+    <button class="ni" onclick="sw('writing',this)"><span>✍️</span>Blog & Writing</button>
     <button class="ni" onclick="sw('settings',this)"><span>⚙️</span>GitHub Settings</button>
   </nav>
   <div class="sf">
@@ -154,6 +177,8 @@ code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15re
         <div class="fr"><div class="fg"><label>Tagline (after ·)</label><input id="ht" type="text"/></div><div class="fg"><label>Current Company</label><input id="hc" type="text"/></div></div>
         <div class="fr f1"><div class="fg"><label>Bio</label><textarea id="hb" rows="3"></textarea></div></div>
         <div class="trow"><div><div class="tlabel">Available for Opportunities</div><div class="tsub">Shows green badge in hero</div></div><label class="toggle"><input type="checkbox" id="hav"/><span class="tsl"></span></label></div>
+        <div style="height:1px;background:var(--border);margin:.5rem 0"></div>
+        <div class="fr f1" style="margin-top:.5rem;margin-bottom:0"><div class="fg"><label>CV Download URL <span style="font-weight:400;text-transform:none;font-size:.68rem;color:var(--muted)">(Google Drive / Dropbox direct link)</span></label><input id="hcv" type="url" placeholder="https://drive.google.com/..."/></div></div>
       </div>
       <div class="card"><div class="ct">Stats Bar</div>
         <div class="fr f3"><div class="fg"><label>Stat 1 Value</label><input id="s0n"/></div><div class="fg"><label>Stat 1 Label</label><input id="s0l"/></div><div></div></div>
@@ -195,8 +220,9 @@ code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15re
       <div class="card"><div class="ct">Education</div>
         <div class="led" id="eued"></div><button class="ab" onclick="addEdu()">+ Add Education</button>
       </div>
-      <div class="card"><div class="ct">Certification</div>
-        <div class="fr"><div class="fg"><label>Title</label><input id="ctt"/></div><div class="fg"><label>Organization</label><input id="co"/></div></div>
+      <div class="card"><div class="ct">Certifications</div>
+        <div class="led" id="certsed"></div>
+        <button class="ab" onclick="addCert()">+ Add Certification</button>
       </div>
     </div>
 
@@ -204,6 +230,85 @@ code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15re
     <div id="tab-projects" class="tab">
       <div class="card"><div class="ct">Projects</div>
         <div class="led" id="pred"></div><button class="ab" onclick="addProj()">+ Add Project</button>
+      </div>
+    </div>
+
+    <!-- WRITING / BLOG -->
+    <div id="tab-writing" class="tab">
+      <div class="card">
+        <div class="ct">✍️ Blog & Writing <span style="font-size:.72rem;font-weight:400;color:var(--muted);margin-left:.4rem">— write and publish articles</span></div>
+
+        <!-- Blog List View -->
+        <div id="blog-list-view">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+            <p style="font-size:.85rem;color:var(--muted)">All your articles and blog posts.</p>
+            <button onclick="newBlog()" style="display:inline-flex;align-items:center;gap:.5rem;padding:.6rem 1.2rem;border-radius:9px;background:linear-gradient(135deg,var(--c4),var(--c5));color:#fff;font-weight:700;font-size:.82rem;border:none;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(77,150,255,.3)">+ New Article</button>
+          </div>
+          <div id="blog-posts-list" style="display:flex;flex-direction:column;gap:.7rem"></div>
+          <div id="blog-empty" style="text-align:center;padding:3rem;color:var(--muted);font-size:.9rem;display:none">
+            No articles yet. Click <strong>+ New Article</strong> to write your first one!
+          </div>
+        </div>
+
+        <!-- Blog Editor View -->
+        <div id="blog-editor-view" style="display:none">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1.5rem">
+            <button onclick="backToBlogList()" style="display:inline-flex;align-items:center;gap:.5rem;padding:.55rem 1rem;border-radius:9px;background:rgba(255,255,255,.05);border:1px solid var(--border);color:var(--muted);font-size:.82rem;cursor:pointer;font-family:inherit">← Back to List</button>
+            <div style="display:flex;gap:.7rem">
+              <button onclick="saveBlogDraft()" style="padding:.6rem 1.1rem;border-radius:9px;background:rgba(77,150,255,.1);border:1px solid rgba(77,150,255,.25);color:var(--c4);font-weight:600;font-size:.82rem;cursor:pointer;font-family:inherit">💾 Save Draft</button>
+              <button onclick="publishBlog()" id="publish-btn" style="padding:.6rem 1.2rem;border-radius:9px;background:linear-gradient(135deg,var(--c3),#3aaa5a);color:#061a0c;font-weight:700;font-size:.82rem;border:none;cursor:pointer;font-family:inherit">🚀 Publish</button>
+            </div>
+          </div>
+
+          <div class="fr f1"><div class="fg"><label>Article Title</label><input id="blog-title" type="text" placeholder="Enter your article title…"/></div></div>
+          <div class="fr"><div class="fg"><label>Category</label><input id="blog-category" type="text" placeholder="e.g. QA, Security, Career"/></div><div class="fg"><label>Tags <span style="font-weight:400;font-size:.68rem">(comma separated)</span></label><input id="blog-tags" type="text" placeholder="e.g. QA, Testing, SDLC"/></div></div>
+          <div class="fr f1"><div class="fg"><label>Excerpt / Summary</label><textarea id="blog-excerpt" rows="2" placeholder="Short description shown on the blog card…"></textarea></div></div>
+          <div class="fr f1"><div class="fg"><label>Cover Image URL <span style="font-weight:400;font-size:.68rem">(optional)</span></label><input id="blog-cover" type="url" placeholder="https://…"/></div></div>
+
+          <div class="fg" style="margin-bottom:1rem">
+            <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+              <label>Content <span style="font-weight:400;font-size:.68rem;text-transform:none">(Markdown supported)</span></label>
+              <div style="display:flex;gap:.5rem">
+                <button onclick="setEditorTab('write')" id="editor-write-btn" style="padding:.3rem .8rem;border-radius:6px;background:rgba(77,150,255,.15);border:1px solid rgba(77,150,255,.3);color:var(--c4);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit">✏️ Write</button>
+                <button onclick="setEditorTab('preview')" id="editor-preview-btn" style="padding:.3rem .8rem;border-radius:6px;background:transparent;border:1px solid var(--border);color:var(--muted);font-size:.72rem;font-weight:600;cursor:pointer;font-family:inherit">👁 Preview</button>
+              </div>
+            </div>
+            <!-- Markdown toolbar -->
+            <div style="display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.5rem">
+              <button onclick="insertMd('**','**')" class="md-tool" title="Bold">B</button>
+              <button onclick="insertMd('*','*')" class="md-tool" style="font-style:italic" title="Italic">I</button>
+              <button onclick="insertMd('## ','')" class="md-tool" title="Heading">H2</button>
+              <button onclick="insertMd('### ','')" class="md-tool" title="Subheading">H3</button>
+              <button onclick="insertMd('- ','')" class="md-tool" title="List item">• List</button>
+              <button onclick="insertMd('> ','')" class="md-tool" title="Blockquote">❝</button>
+              <button onclick="insertMd('`','`')" class="md-tool" style="font-family:monospace" title="Inline code">code</button>
+              <button onclick="insertMd('```\n','\n```')" class="md-tool" title="Code block">```</button>
+              <button onclick="insertMd('---','')" class="md-tool" title="Divider">—</button>
+              <button onclick="insertMd('[text](url)','')" class="md-tool" title="Link">🔗</button>
+            </div>
+            <textarea id="blog-content" rows="20" placeholder="Write your article in Markdown…
+
+## Introduction
+
+Start writing here…
+
+## Section 1
+
+Your content…" style="font-family:monospace;font-size:.85rem;line-height:1.7;resize:vertical;min-height:400px"></textarea>
+            <!-- Preview pane -->
+            <div id="blog-preview-pane" style="display:none;border:1px solid var(--border);border-radius:8px;padding:1.5rem;background:var(--surface);min-height:400px;max-height:600px;overflow-y:auto" class="md-body"></div>
+          </div>
+
+          <div class="fr" style="margin-top:.5rem">
+            <div class="fg"><label>Read Time</label><input id="blog-readtime" type="text" placeholder="e.g. 3 min read"/></div>
+            <div class="fg"><label>Publish Date</label><input id="blog-date" type="date"/></div>
+          </div>
+
+          <div class="trow" style="margin-top:.5rem">
+            <div><div class="tlabel">Published</div><div class="tsub">Toggle to make this article visible on your portfolio</div></div>
+            <label class="toggle"><input type="checkbox" id="blog-published"/><span class="tsl"></span></label>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -243,7 +348,7 @@ code{font-family:monospace;font-size:.8rem;background:var(--card2);padding:.15re
 function logout(){localStorage.removeItem('caf_session');window.location.replace('login.html');}
 
 let D={};
-const TT={overview:'Dashboard',hero:'Hero & Intro',about:'About & Contact',skills:'Skills',experience:'Experience',education:'Education',projects:'Projects',settings:'GitHub Settings'};
+const TT={overview:'Dashboard',hero:'Hero & Intro',about:'About & Contact',skills:'Skills',experience:'Experience',education:'Education',projects:'Projects',writing:'Blog & Writing',settings:'GitHub Settings'};
 
 function sw(name,el){
   document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
@@ -286,7 +391,7 @@ function upOv(){
   document.getElementById('ov1').textContent=D.experience?.length||0;
   document.getElementById('ov2').textContent=D.projects?.length||0;
   document.getElementById('ov3').textContent=D.skills?.length||0;
-  document.getElementById('ov4').textContent=D.education?.length||0;
+  document.getElementById('ov4').textContent=(D.education?.length||0)+(D.certifications?.length||0);
 }
 function populate(){
   const h=D.hero||{};
@@ -300,8 +405,10 @@ function populate(){
   document.getElementById('ap').value=a.phone||'';document.getElementById('al').value=a.location||'';
   document.getElementById('ali').value=a.linkedin||'';document.getElementById('ag').value=a.github||'';
   rSk();rEx();rEu();rPr();
-  document.getElementById('ctt').value=D.certification?.title||'';
-  document.getElementById('co').value=D.certification?.org||'';
+  D.blogs = D.blogs || [];
+  renderBlogList();
+  document.getElementById('hcv').value=D.hero?.cv_url||'';
+  rCerts();
   // Load GH settings
   const gh=JSON.parse(localStorage.getItem('caf_gh')||'{}');
   document.getElementById('gh-owner').value=gh.owner||'';
@@ -310,6 +417,16 @@ function populate(){
 }
 
 // ── SKILLS ───────────────────────────────────────────────────────────────
+function rCerts(){
+  document.getElementById('certsed').innerHTML=(D.certifications||[]).map((c,i)=>`
+    <div class="li"><div class="lin">${i+1}</div><div class="lib">
+      <div class="fr"><div class="fg"><label>Title</label><input type="text" value="${esc(c.title||'')}" oninput="D.certifications[${i}].title=this.value"/></div>
+      <div class="fg"><label>Organization</label><input type="text" value="${esc(c.org||'')}" oninput="D.certifications[${i}].org=this.value"/></div></div>
+      <div class="fr f3"><div class="fg"><label>Year</label><input type="text" value="${esc(c.year||'')}" placeholder="2024" oninput="D.certifications[${i}].year=this.value"/></div><div></div><div></div></div>
+    </div><button class="db" onclick="D.certifications.splice(${i},1);rCerts()">✕</button></div>`).join('');
+}
+function addCert(){D.certifications=D.certifications||[];D.certifications.push({title:'Certification Name',org:'Organization',year:new Date().getFullYear().toString()});rCerts();}
+
 function rSk(){
   document.getElementById('sked').innerHTML=(D.skills||[]).map((s,i)=>`
     <div class="li"><div class="lin">${i+1}</div><div class="lib">
@@ -378,7 +495,9 @@ function collect(){
   D.about.bio3=document.getElementById('ab3').value;D.about.email=document.getElementById('ae').value;
   D.about.phone=document.getElementById('ap').value;D.about.location=document.getElementById('al').value;
   D.about.linkedin=document.getElementById('ali').value;D.about.github=document.getElementById('ag').value;
-  D.certification={title:document.getElementById('ctt').value,org:document.getElementById('co').value};
+  D.hero.cv_url = document.getElementById('hcv')?.value || '';
+  D.certifications = D.certifications || [];
+  D.blogs = D.blogs || [];
 }
 
 function saveLocally(){
@@ -448,6 +567,8 @@ async function deployLive(){
   setStatus('busy','Deploying…');
   document.getElementById('dlog').innerHTML='';
   log('Starting deploy via GitHub API…','li2');
+  log(`Owner: "${gh.owner}" | Repo: "${gh.repo}"`, 'li2');
+  log(`URL base: https://api.github.com/repos/${gh.owner}/${gh.repo}`, 'li2');
 
   try{
     // Encode content as base64 (handles unicode correctly)
@@ -468,6 +589,7 @@ async function deployLive(){
 
     for(const tryPath of pathsToTry){
       const tryUrl = `https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/${tryPath}`;
+      log(`Trying: ${tryUrl}`, 'li2');
       const tryResp = await fetch(tryUrl, { method:'GET', headers });
       if(tryResp.ok){
         const tryJson = await tryResp.json();
@@ -483,14 +605,22 @@ async function deployLive(){
       // 404 = not at this path, try next
     }
 
-    // If not found at any path, create at public/data.json
+    // If not found at any path, verify repo exists first then create
     if(!apiBase){
+      // Check repo exists
+      const repoCheck = await fetch(`https://api.github.com/repos/${gh.owner}/${gh.repo}`, {headers});
+      if(repoCheck.status === 404){
+        throw new Error(`Repo not found: "${gh.owner}/${gh.repo}". Check your GitHub username and repo name in Settings.`);
+      }
+      if(repoCheck.status === 401){
+        throw new Error('Token invalid. Update your GitHub token in Settings.');
+      }
       apiBase = `https://api.github.com/repos/${gh.owner}/${gh.repo}/contents/public/data.json`;
       log('data.json not found — will create at public/data.json','li2');
     }
 
     // Step 2: PUT (update or create) the file
-    log(currentSha ? 'Updating data.json…' : 'Creating data.json…','li2');
+    log((currentSha ? 'Updating' : 'Creating')+` data.json at: ${apiBase}`,'li2');
     const putBody = {
       message: `Portfolio updated — ${new Date().toLocaleString()}`,
       content: newContentB64,
@@ -501,11 +631,14 @@ async function deployLive(){
     const putRawText = await putResp.text();
 
     if(!putResp.ok){
-      let errMsg = `GitHub PUT failed (${putResp.status})`;
+      let errMsg = `GitHub PUT failed (${putResp.status}) at: ${apiBase}`;
       try{
         const errJson = JSON.parse(putRawText);
-        errMsg += ': ' + (errJson.message || JSON.stringify(errJson));
-      } catch(e){ errMsg += ': ' + putRawText.slice(0,100); }
+        errMsg += ' — ' + (errJson.message || JSON.stringify(errJson));
+        if(putResp.status===404) errMsg += ' ← Check your GitHub username and repo name in Settings tab!';
+        if(putResp.status===422) errMsg += ' ← SHA mismatch. Try again.';
+        if(putResp.status===401) errMsg += ' ← Token expired. Update in Settings tab.';
+      } catch(e){ errMsg += ' — ' + putRawText.slice(0,100); }
       throw new Error(errMsg);
     }
 
@@ -531,6 +664,196 @@ async function deployLive(){
     btn.disabled=false; btn.textContent='🚀 Deploy Live';
   }
 }
+
+
+// ── BLOG ADMIN ────────────────────────────────────────────────────────────
+const TT_EXT = {writing:'Blog & Writing'};
+let editingBlogId = null;
+
+function renderBlogList() {
+  const blogs = D.blogs || [];
+  const list = document.getElementById('blog-posts-list');
+  const empty = document.getElementById('blog-empty');
+  if(blogs.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    return;
+  }
+  empty.style.display = 'none';
+  list.innerHTML = [...blogs].reverse().map((b,ri) => {
+    const i = blogs.length - 1 - ri;
+    return `<div class="blog-post-item" onclick="editBlog('${b.id}')">
+      <div class="blog-post-info">
+        <div class="blog-post-title">${b.title || 'Untitled'}</div>
+        <div class="blog-post-meta">${b.category || ''} · ${b.date || ''} · ${b.read_time || ''}</div>
+      </div>
+      <span class="blog-status ${b.published ? 'pub' : 'draft'}">${b.published ? '● Published' : '○ Draft'}</span>
+      <button onclick="event.stopPropagation();deleteBlog('${b.id}')" style="background:rgba(255,107,107,.08);border:1px solid rgba(255,107,107,.18);color:var(--c1);border-radius:7px;padding:.35rem .55rem;cursor:pointer;font-size:.75rem;flex-shrink:0">✕</button>
+    </div>`;
+  }).join('');
+}
+
+function newBlog() {
+  editingBlogId = 'blog_' + Date.now();
+  clearBlogEditor();
+  document.getElementById('blog-date').value = new Date().toISOString().split('T')[0];
+  document.getElementById('blog-list-view').style.display = 'none';
+  document.getElementById('blog-editor-view').style.display = 'block';
+  document.getElementById('blog-title').focus();
+}
+
+function editBlog(id) {
+  const blog = (D.blogs || []).find(b => b.id === id);
+  if(!blog) return;
+  editingBlogId = id;
+  document.getElementById('blog-title').value     = blog.title || '';
+  document.getElementById('blog-category').value  = blog.category || '';
+  document.getElementById('blog-tags').value      = (blog.tags || []).join(', ');
+  document.getElementById('blog-excerpt').value   = blog.excerpt || '';
+  document.getElementById('blog-cover').value     = blog.cover || '';
+  document.getElementById('blog-content').value   = blog.content || '';
+  document.getElementById('blog-readtime').value  = blog.read_time || '';
+  document.getElementById('blog-date').value      = blog.date || '';
+  document.getElementById('blog-published').checked = !!blog.published;
+  document.getElementById('blog-list-view').style.display = 'none';
+  document.getElementById('blog-editor-view').style.display = 'block';
+  setEditorTab('write');
+}
+
+function clearBlogEditor() {
+  ['blog-title','blog-category','blog-tags','blog-excerpt','blog-cover','blog-content','blog-readtime'].forEach(id => {
+    document.getElementById(id).value = '';
+  });
+  document.getElementById('blog-published').checked = false;
+  setEditorTab('write');
+}
+
+function backToBlogList() {
+  document.getElementById('blog-list-view').style.display = 'block';
+  document.getElementById('blog-editor-view').style.display = 'none';
+  editingBlogId = null;
+}
+
+function getBlogFromEditor() {
+  const tagsRaw = document.getElementById('blog-tags').value;
+  const tags = tagsRaw.split(',').map(t => t.trim()).filter(Boolean);
+  const title = document.getElementById('blog-title').value.trim();
+  const slug = title.toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
+  const content_val = document.getElementById('blog-content').value;
+  const wordCount = content_val.split(/\s+/).filter(Boolean).length;
+  const readTime = Math.max(1, Math.round(wordCount / 200)) + ' min read';
+  return {
+    id: editingBlogId,
+    title,
+    slug,
+    category: document.getElementById('blog-category').value.trim(),
+    tags,
+    excerpt: document.getElementById('blog-excerpt').value.trim(),
+    cover: document.getElementById('blog-cover').value.trim(),
+    content: content_val,
+    published: document.getElementById('blog-published').checked,
+    date: document.getElementById('blog-date').value || new Date().toISOString().split('T')[0],
+    read_time: document.getElementById('blog-readtime').value.trim() || readTime
+  };
+}
+
+function saveBlogDraft() {
+  const blog = getBlogFromEditor();
+  blog.published = false;
+  document.getElementById('blog-published').checked = false;
+  saveBlogToData(blog);
+  toast('Draft saved!', 's');
+}
+
+function publishBlog() {
+  const blog = getBlogFromEditor();
+  if(!blog.title) { toast('Please add a title first', 'e'); return; }
+  blog.published = true;
+  document.getElementById('blog-published').checked = true;
+  saveBlogToData(blog);
+  toast('Article published! Click Deploy Live to go live.', 's');
+}
+
+function saveBlogToData(blog) {
+  D.blogs = D.blogs || [];
+  const idx = D.blogs.findIndex(b => b.id === blog.id);
+  if(idx !== -1) D.blogs[idx] = blog;
+  else D.blogs.push(blog);
+  localStorage.setItem('caf_draft', JSON.stringify(D));
+  renderBlogList();
+}
+
+function deleteBlog(id) {
+  if(!confirm('Delete this article?')) return;
+  D.blogs = (D.blogs || []).filter(b => b.id !== id);
+  localStorage.setItem('caf_draft', JSON.stringify(D));
+  renderBlogList();
+  toast('Article deleted', 's');
+}
+
+// ── MARKDOWN TOOLBAR ────────────────────────────────────────────────────────
+function insertMd(before, after) {
+  const ta = document.getElementById('blog-content');
+  const start = ta.selectionStart, end = ta.selectionEnd;
+  const selected = ta.value.substring(start, end);
+  const replacement = before + (selected || 'text') + after;
+  ta.value = ta.value.substring(0, start) + replacement + ta.value.substring(end);
+  ta.focus();
+  ta.selectionStart = start + before.length;
+  ta.selectionEnd = start + before.length + (selected || 'text').length;
+}
+
+// ── EDITOR WRITE/PREVIEW TOGGLE ────────────────────────────────────────────
+function setEditorTab(mode) {
+  const ta = document.getElementById('blog-content');
+  const pane = document.getElementById('blog-preview-pane');
+  const wBtn = document.getElementById('editor-write-btn');
+  const pBtn = document.getElementById('editor-preview-btn');
+  if(mode === 'write') {
+    ta.style.display = 'block';
+    pane.style.display = 'none';
+    wBtn.style.background = 'rgba(77,150,255,.15)';
+    wBtn.style.borderColor = 'rgba(77,150,255,.3)';
+    wBtn.style.color = 'var(--c4)';
+    pBtn.style.background = 'transparent';
+    pBtn.style.borderColor = 'var(--border)';
+    pBtn.style.color = 'var(--muted)';
+  } else {
+    pane.innerHTML = parseMarkdownAdmin(ta.value);
+    ta.style.display = 'none';
+    pane.style.display = 'block';
+    pBtn.style.background = 'rgba(77,150,255,.15)';
+    pBtn.style.borderColor = 'rgba(77,150,255,.3)';
+    pBtn.style.color = 'var(--c4)';
+    wBtn.style.background = 'transparent';
+    wBtn.style.borderColor = 'var(--border)';
+    wBtn.style.color = 'var(--muted)';
+  }
+}
+
+// ── MARKDOWN PARSER (admin preview) ────────────────────────────────────────
+function parseMarkdownAdmin(md) {
+  if(!md) return '<p style="color:var(--muted)">Nothing to preview yet…</p>';
+  let html = md
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/```([\s\S]*?)```/g,'<pre><code>$1</code></pre>')
+    .replace(/`([^`]+)`/g,'<code>$1</code>')
+    .replace(/^### (.+)$/gm,'<h3>$1</h3>')
+    .replace(/^## (.+)$/gm,'<h2>$1</h2>')
+    .replace(/^# (.+)$/gm,'<h1>$1</h1>')
+    .replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>')
+    .replace(/\*([^*]+)\*/g,'<em>$1</em>')
+    .replace(/^> (.+)$/gm,'<blockquote><p>$1</p></blockquote>')
+    .replace(/^---$/gm,'<hr/>')
+    .replace(/^- (.+)$/gm,'<li>$1</li>')
+    .replace(/^\d+\. (.+)$/gm,'<li>$1</li>')
+    .replace(/\[([^\]]+)\]\(([^)]+)\)/g,'<a href="$2">$1</a>')
+    .replace(/\n\n/g,'</p><p>')
+    .replace(/\n/g,'<br/>');
+  html = html.replace(/(<li>.*?<\/li>)+/gs, m => '<ul>' + m + '</ul>');
+  return '<p>' + html + '</p>';
+}
+
 
 loadData();
 </script>
